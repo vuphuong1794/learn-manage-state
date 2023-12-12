@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useReducer } from "react";
+
+const reducer = (state, action) => {
+  switch (action) {
+    case "tang":
+      return (state += 1);
+    case "giam":
+      return (state -= 1);
+    case "xoaAll":
+      return 0;
+    default:
+      return;
+  }
+};
 
 function App() {
+  const [count, dispatch] = useReducer(reducer, 0);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h2>{count}</h2>
+      <button onClick={() => dispatch("tang")}>tang</button>
+      <button onClick={() => dispatch("giam")}>giam</button>
+      <button onClick={() => dispatch("xoaAll")}>reset</button>
+    </>
   );
 }
 
